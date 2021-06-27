@@ -1,0 +1,16 @@
+{
+"title": "github-latest-commits-widget", 
+"visibility": "public", 
+"type": "GIT", 
+"description": "Show the latest commit activity on your repo, keeping the community updated and giving users more incentive to contribute to your project with this widget.", 
+"url": "https://github.com/nasa/github-latest-commits-widget",
+"repo": "nasa/github-latest-commits-widget",
+"missions":["OCIO", "HQ"], 
+"categories": ["NASA", "Open Source", "Collaboration"], 
+"languages": ["HTML", "CSS", "Javascript"],
+"operating_systems": ["Linux", "Windows", "Unix", "Mac"],  
+"poc": "Jason Duley", 
+"poc_mbox": "jason.duley@nasa.gov", 
+"license": "NASA Open Source Agreement Version 1.3", 
+"software_types": ["website", "widget"]
+}

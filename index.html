@@ -7,30 +7,55 @@
       body {
         margin: 0;
         padding: 0;
+background:#000;
+color:#fff;
+font-size:0.8em;
+font-family: Arial, Helvetica, sans-serif;
       }
       ul {
 	    list-style-type: none;
 	margin:0;
 	padding:0;
 	}
-	i.commit-sha {
-	    display: none;
+	a {
+		color:#9CF;
+		text-decoration:none;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+	div#latest-commmits-widget {
+		font-family: Arial, Helvetica, sans-serif;
+	}
+	a:hover {
+		text-decoration:underline;
+	}
+	div#view {
+		text-align:center;
 	}
 	.commit-author-info {
 	    width: 100%;
 	    clear: both;
 	}
+	b.commit-date,b.commit-author {
+		font-size:0.85em;
+		font-weight:normal;
+	}
+	b.commit-date {
+		font-style:italic;
+	}
 	.commit-avatar {
-	    max-width: 50px;
+	    max-width: 40px;
 	    float: left;
 	    margin-right: 5px;
+	}
+	.commit-message {
+		font-weight:bold;
 	}
 	div.commit-author-info a {
 	}
 	li {
 	    margin-bottom: 10px;
 	    padding-bottom: 10px;
-	    border-bottom: 1px solid black;
+	    border-bottom: 1px solid #ccc;
 	    min-height: 45px;
 	}
 	li:last-child {
@@ -43,6 +68,7 @@
         <ul id="commit-history">
             
         </ul>
+		<div id="view"><a href="https://github.com/nasa/digital-strategy">View on Github</a></div>
     </div>
 
     <script type="text/coffeescript">
@@ -78,16 +104,14 @@
           $(response).each (index, result) ->
               $(ul).append("""
                   <li>
-                  <div class="commit-author-info">
-                      <img class="commit-avatar" src="#{result.author.avatar_url}"> <a href="https://github.com/#{result.author.login}"><b class="commit-author">#{result.author.login}</b></a>
-                      <b class="commit-date">#{$.timeago(result.commit.committer.date)}</b><br /><i class="commit-sha">SHA: #{result.sha}</i>
-                  </div>
-                  <a class="commit-message" href="https://github.com/#{username}/#{repo}/commit/#{result.sha}" target="_blank">#{result.commit.message}</a>
+                  <div class="commit-info">
+                      <img class="commit-avatar" src="#{result.author.avatar_url}">
+<a class="commit-message" href="https://github.com/#{username}/#{repo}/commit/#{result.sha}" target="_blank">#{result.commit.message}</a><br>
+<a href="https://github.com/#{result.author.login}"><b class="commit-author">#{result.author.login}</b></a>
+                      (<b class="commit-date">#{$.timeago(result.commit.committer.date)}</b>)
+					</div>
                   </li>
               """)
-        
-        container.find('h4').text("Latest Commits to #{username}/#{repo}")
-
         $.ajax(
             "https://api.github.com/repos/#{username}/#{repo}/commits?callback=callback"
             data:
